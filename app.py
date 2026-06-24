@@ -287,12 +287,7 @@ st.markdown(
 #  CONSTANTS
 # ──────────────────────────────────────────────
 DISCOMS = {
-    "TSSPDCL": "Telangana Southern Power Distribution Co. Ltd.",
-    "TSNPDCL": "Telangana Northern Power Distribution Co. Ltd.",
-    "APEPDCL": "Andhra Pradesh Eastern Power Distribution Co. Ltd.",
-    "APSPDCL": "Andhra Pradesh Southern Power Distribution Co. Ltd.",
-    "BESCOM":  "Bangalore Electricity Supply Company",
-    "MSEDCL":  "Maharashtra State Electricity Distribution Co. Ltd.",
+    
 }
 APPLIANCES = [
     "Agricultural Water Pump (5 HP)",
