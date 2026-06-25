@@ -224,18 +224,6 @@ div[data-testid="stProgressBar"] > div > div { background: linear-gradient(90deg
 .priv-key   { color:#b3e5fc; font-weight:700; }
 .priv-foot  { margin-top:1rem; padding-top:0.8rem; border-top:1px solid rgba(255,255,255,0.09); font-size:0.73rem; color:rgba(165,195,235,0.52); }
 
-/* ── Project info box ── */
-.info-box { background:linear-gradient(135deg,#0f1e38,#132640); border:1px solid rgba(100,181,246,0.22); border-radius:16px; padding:1.6rem 1.9rem; margin-bottom:10px; }
-.info-box h3 { font-size:0.95rem; font-weight:800; color:#90caf9; margin:0 0 0.8rem; letter-spacing:0.3px; }
-.info-box p  { font-size:0.86rem; color:rgba(218,232,255,0.90); line-height:1.80; margin:0 0 0.7rem; }
-.info-box ul { margin:0; padding-left:1.2rem; }
-.info-box li { font-size:0.85rem; color:rgba(218,232,255,0.88); line-height:1.78; margin-bottom:0.35rem; }
-.info-box li b { color:#b3e5fc; }
-.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:0.6rem; }
-.tag { background:rgba(100,181,246,0.14); border:1px solid rgba(100,181,246,0.30); border-radius:100px; padding:3px 12px; font-size:0.74rem; font-weight:700; color:#90caf9; }
-.tag-green { background:rgba(105,240,174,0.12); border-color:rgba(105,240,174,0.30); color:#69f0ae; }
-.tag-gold  { background:rgba(255,224,100,0.12); border-color:rgba(255,224,100,0.30); color:#ffe57f; }
-
 /* ── Footer ── */
 .eco-footer { margin-top:2.8rem; padding-top:1.2rem; border-top:1px solid rgba(255,255,255,0.09); text-align:center; font-size:0.74rem; color:rgba(180,205,245,0.48); line-height:1.7; }
 </style>
@@ -446,122 +434,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Project Info Expander ──────────────────────────────────────────────────────
-with st.expander("📋 About This Project — Problem Statement, Solution & AI Stack", expanded=False):
-    st.markdown("""
-    <div class="info-box">
-      <h3>🔴 Problem Statement</h3>
-      <p>
-        India's power distribution networks — particularly TSSPDCL and TSNPDCL serving Telangana's 6+ million
-        consumers — face severe grid instability caused by <b>uncoordinated residential peak demand</b>.
-        During summer months (March–June), ambient temperatures between 32°C and 42°C drive simultaneous
-        AC, agricultural pump, and water heater usage between 6–9 AM and 6–10 PM. This creates feeder
-        overloads, voltage sags, and unplanned load-shedding events, disproportionately affecting rural
-        and lower-income consumers.
-      </p>
-      <p>
-        Simultaneously, rooftop solar generation peaks between 10 AM and 3 PM — a window that most
-        households completely waste because they run high-load appliances in the evening instead.
-        The result: consumers pay inflated peak-hour tariffs, the grid burns more coal to meet demand
-        spikes, and 1,400+ tonnes of avoidable CO₂ are emitted daily across the state.
-      </p>
-      <p>
-        <b>The core gap:</b> Individual consumers have no accessible, personalized tool to understand
-        how their specific consumption pattern contributes to grid stress, what they can practically
-        do about it, and what financial and environmental savings they stand to gain.
-      </p>
-      <div class="tag-row">
-        <span class="tag">Grid Instability</span>
-        <span class="tag">Peak Demand Crisis</span>
-        <span class="tag">Wasted Solar Window</span>
-        <span class="tag">Consumer Awareness Gap</span>
-        <span class="tag-gold">UN SDG 7</span>
-        <span class="tag-green">UN SDG 13</span>
-      </div>
-    </div>
 
-    <div class="info-box">
-      <h3>💡 Detailed Solution Description</h3>
-      <p>
-        <b>Eco-Watt AI</b> is a zero-infrastructure, consumer-facing web application that transforms
-        an anonymous Electricity Meter / Consumer Number into a complete, personalized energy intelligence
-        report — in under 3 seconds, with no external API calls and no data stored.
-      </p>
-      <ul>
-        <li><b>Step 1 — Consumer Identity Mapping:</b> The meter number is SHA-256 hashed into a
-        deterministic seed. This seed drives all downstream simulation, ensuring the same ID always
-        produces the same consistent profile — mimicking real DISCOM database lookup without storing
-        any personal data.</li>
-        <li><b>Step 2 — Regional Grid Simulation:</b> The pipeline generates a complete consumer
-        profile mapped to real TSSPDCL/TSNPDCL tariff codes (LT-1A, LT-1B, LT-5A, LT-2, etc.),
-        localities (Hyderabad Urban, Cyberabad Zone, Warangal Urban, Nalgonda, Rangareddy),
-        and DISCOM-specific demand-response eligibility flags.</li>
-        <li><b>Step 3 — Weather Telemetry Merge:</b> Realistic IMD-range weather parameters
-        (ambient temperature 32–42°C, heat index, solar irradiance 420–890 W/m², humidity, wind,
-        UV index) are blended with the consumption profile to compute temperature-driven load forecasts.</li>
-        <li><b>Step 4 — 24-Hour Demand Forecast:</b> Hour-by-hour grid draw is modelled using
-        time-of-use demand curves calibrated to Telangana feeder patterns, with solar generation
-        offset computed using a sine-curve irradiance model across the 9 AM–4 PM window.</li>
-        <li><b>Step 5 — Optimization Engine:</b> Five personalized, appliance-specific load-shifting
-        recommendations are generated with exact time windows, Rs/month savings projections, and
-        CO₂ mitigation quantities calculated using CEA 2023 India grid emission factor (0.71 kg CO₂/kWh).</li>
-        <li><b>Step 6 — ROI &amp; Impact Dashboard:</b> Monthly bill savings (Rs), annual savings,
-        monthly and annual CO₂ mitigation, tree-equivalent impact, and SDG alignment metrics are
-        displayed in a clear, actionable summary.</li>
-        <li><b>Step 7 — Responsible AI Privacy Layer:</b> No personal data is stored or transmitted.
-        All processing is session-scoped and DPDPA 2023 compliant.</li>
-      </ul>
-      <div class="tag-row">
-        <span class="tag">Meter-to-Profile Mapping</span>
-        <span class="tag">Weather Telemetry Fusion</span>
-        <span class="tag">24h Demand Forecasting</span>
-        <span class="tag">Load Optimization Engine</span>
-        <span class="tag-green">Carbon ROI Calculator</span>
-        <span class="tag-gold">DPDPA 2023 Compliant</span>
-      </div>
-    </div>
-
-    <div class="info-box">
-      <h3>🤖 AI Elements &amp; Tools Used</h3>
-      <ul>
-        <li><b>Deterministic Hash-Based Simulation (SHA-256):</b> The meter number is cryptographically
-        hashed using SHA-256 and converted to a 64-bit integer seed. This seeds Python's
-        <code style="background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;color:#b3e5fc">random.Random</code>
-        instance, creating a fully deterministic, reproducible AI-driven consumer profile without
-        any database — a privacy-preserving AI simulation pattern.</li>
-        <li><b>Rule-Based AI Inference Engine:</b> The optimization recommendation engine applies
-        domain-expert rules encoded as conditional logic across the consumer's appliance inventory,
-        tariff code, time-of-use windows, and grid stress index — functioning as an expert system
-        analogous to a lightweight decision-tree AI model.</li>
-        <li><b>Physics-Based Solar Generation Model:</b> Solar irradiance is converted to kWh output
-        using a sine-curve approximation of the sun's arc across the 9 AM–4 PM generation window,
-        weighted by today's W/m² irradiance measurement — a standard photovoltaic energy modelling
-        technique used in NREL's PVWatts calculator.</li>
-        <li><b>Time-Series Demand Forecasting:</b> A 24-hour load curve is constructed using
-        stochastic modelling calibrated to empirical Telangana feeder demand patterns, including
-        morning (6–9 AM) and evening (6–10 PM) peak amplification factors — mimicking the
-        output of an LSTM or ARIMA time-series forecasting model.</li>
-        <li><b>Carbon Mitigation Calculator:</b> Uses the Central Electricity Authority (CEA) 2023
-        India-specific grid emission factor of 0.71 kg CO₂/kWh to translate every kWh saved into
-        a precise CO₂ reduction quantity, with tree-equivalence derived from IPCC carbon sink averages.</li>
-        <li><b>Grid Stress Classifier:</b> A threshold-based stress classifier (MODERATE / HIGH / CRITICAL)
-        maps the continuous grid stress index (0–1) to three alert severity levels, triggering
-        different actionable responses — functionally equivalent to a 3-class classification model.</li>
-        <li><b>Framework &amp; Stack:</b> Python 3.10 · Streamlit 1.35 · Docker (python:3.10-slim) ·
-        SHA-256 via Python hashlib · Math/physics via Python math module · Deployed on Render
-        via Docker runtime.</li>
-      </ul>
-      <div class="tag-row">
-        <span class="tag">SHA-256 Privacy-AI</span>
-        <span class="tag">Expert System / Rule Engine</span>
-        <span class="tag">Solar PV Modelling</span>
-        <span class="tag">Time-Series Demand Forecast</span>
-        <span class="tag">Grid Stress Classifier</span>
-        <span class="tag-green">CEA Carbon Calculator</span>
-        <span class="tag-gold">Streamlit · Docker · Python 3.10</span>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
 
 # ── Input Card ────────────────────────────────────────────────────────────────
 st.markdown('<div class="input-card">', unsafe_allow_html=True)
