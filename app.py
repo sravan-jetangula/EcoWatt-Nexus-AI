@@ -1,4 +1,3 @@
-cat > /home/claude/eco-watt-ai/app.py << 'PYEOF'
 import streamlit as st
 import random
 import math
