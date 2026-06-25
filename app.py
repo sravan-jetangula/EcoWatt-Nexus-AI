@@ -287,6 +287,18 @@ st.markdown(
 #  CONSTANTS
 # ──────────────────────────────────────────────
 DISCOMS = {
+    "TSSPDCL": {
+        "region": "Telangana South"
+    },
+    "TSNPDCL": {
+        "region": "Telangana North"
+    },
+    "APEPDCL": {
+        "region": "Andhra Pradesh East"
+    },
+    "APSPDCL": {
+        "region": "Andhra Pradesh South"
+    }
     
 }
 APPLIANCES = [
