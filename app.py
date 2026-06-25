@@ -433,9 +433,6 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-
-
-
 # ── Input Card ────────────────────────────────────────────────────────────────
 st.markdown('<div class="input-card">', unsafe_allow_html=True)
 st.markdown('<div class="card-eyebrow">🔍 Consumer Identity Lookup</div>', unsafe_allow_html=True)
